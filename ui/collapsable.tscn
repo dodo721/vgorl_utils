@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://db06g5hk7irhy"]
+
+[ext_resource type="Script" uid="uid://d1027wmkysmhi" path="res://addons/vgorl_utils/ui/collapsable.gd" id="1_t6stl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoruf"]
+bg_color = Color(1, 1, 1, 0)
+
+[node name="Collapsable" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+script = ExtResource("1_t6stl")
+
+[node name="Head" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="Title" type="CheckButton" parent="Head"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_eoruf")
+text = "Collapsable"
+
+[node name="Body" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[connection signal="toggled" from="Head/Title" to="." method="_on_head_toggled"]
