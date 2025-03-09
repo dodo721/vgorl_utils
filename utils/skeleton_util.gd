@@ -9,8 +9,8 @@ func new_jiggle (skeleton: Skeleton3D, jiggle: JiggleBone):
 	skeleton.add_child(jiggle);
 	jiggle.owner = skeleton.owner;
 
-func free_jiggle (jiggle: JiggleBone):
-	jiggle.free();
+func free_jiggle (skeleton: Skeleton3D, jiggle: JiggleBone):
+	skeleton.remove_child(jiggle);
 
 func _on_setup_physics_btn_pressed() -> void:
 	for skeleton: Skeleton3D in nodes:
@@ -26,7 +26,7 @@ func _on_setup_physics_btn_pressed() -> void:
 				else:
 					jiggle.settings = JiggleSettings.new();
 				undo_redo.add_do_method(self, "new_jiggle", skeleton, jiggle);
-				undo_redo.add_undo_method(self, "free_jiggle", jiggle);
+				undo_redo.add_undo_method(self, "free_jiggle", skeleton, jiggle);
 				undo_redo.add_do_reference(jiggle);
 		undo_redo.commit_action();
 

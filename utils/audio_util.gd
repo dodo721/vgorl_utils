@@ -5,13 +5,10 @@ class_name AudioUtil;
 
 func _ready() -> void:
 	super();
-	$FileDialog.file_selected.connect(_create_randomizer);
-	$FileDialog.initial_position = Window.WindowInitialPosition.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN;
-	$FileDialog.add_filter("*.tres, *.res", "All Recognized");
+	expose_bool_field("Use Regex");
 
 func _on_group_rand_btn_pressed() -> void:
-	$FileDialog.current_path = resource_paths[0].get_base_dir() + "/" + "randomizer.tres";
-	$FileDialog.show();
+	pass;
 
 func _create_randomizer (path: String):
 	var randomizer = AudioStreamRandomizer.new();

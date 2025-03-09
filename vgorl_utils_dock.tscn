@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ckldlnrmansvj"]
+[gd_scene load_steps=18 format=3 uid="uid://ckldlnrmansvj"]
 
 [ext_resource type="PackedScene" uid="uid://db06g5hk7irhy" path="res://addons/vgorl_utils/ui/collapsable.tscn" id="1_c8bha"]
 [ext_resource type="Texture2D" uid="uid://uv4x4fgrvlhk" path="res://addons/vgorl_utils/icons/physics.png" id="1_o7k1y"]
@@ -6,10 +6,15 @@
 [ext_resource type="Script" uid="uid://ctmjedwykalov" path="res://addons/vgorl_utils/utils/skeleton_util.gd" id="2_sb60x"]
 [ext_resource type="Theme" uid="uid://cbs5o4r3pgds2" path="res://addons/vgorl_utils/ui/node_util.theme" id="4_8aqei"]
 [ext_resource type="Texture2D" uid="uid://bbmeps7xpnlom" path="res://addons/vgorl_utils/icons/Skeleton3D.svg" id="4_47ggb"]
+[ext_resource type="Texture2D" uid="uid://c2kwuij216fxr" path="res://addons/vgorl_utils/icons/Node.svg" id="5_7h0i1"]
 [ext_resource type="Texture2D" uid="uid://bihm5snqh6fdq" path="res://addons/vgorl_utils/icons/no_physics.png" id="5_u35bs"]
+[ext_resource type="Texture2D" uid="uid://dey3o73ftq0iq" path="res://addons/vgorl_utils/icons/FontFile.svg" id="6_8bo30"]
 [ext_resource type="Theme" uid="uid://oa4c21o3c6jw" path="res://addons/vgorl_utils/ui/file_util.theme" id="7_obesw"]
 [ext_resource type="Script" uid="uid://b681ne4kt8eab" path="res://addons/vgorl_utils/utils/audio_util.gd" id="8_fy45i"]
+[ext_resource type="Script" uid="uid://bvnruy3egdvi6" path="res://addons/vgorl_utils/utils/bone_attachment_util.gd" id="8_grwf2"]
+[ext_resource type="Texture2D" uid="uid://dhv1n8h6ggrlt" path="res://addons/vgorl_utils/icons/BoneAttachment3D.svg" id="8_u7yob"]
 [ext_resource type="Texture2D" uid="uid://cronc7qjd5f3l" path="res://addons/vgorl_utils/icons/AudioStreamOggVorbis.svg" id="9_8aqei"]
+[ext_resource type="Texture2D" uid="uid://lpomeu78nrsu" path="res://addons/vgorl_utils/icons/RemoteTransform3D.svg" id="10_v0f80"]
 [ext_resource type="Texture2D" uid="uid://bicvfjy6g7vm4" path="res://addons/vgorl_utils/icons/AudioStreamRandomizer.svg" id="11_vvfr5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sb60x"]
@@ -27,6 +32,43 @@ script = ExtResource("1_vyob3")
 [node name="HideUnselected" type="CheckBox" parent="."]
 layout_mode = 2
 text = "Hide unselected"
+
+[node name="NodeUtils" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("8_fy45i")
+
+[node name="Controls" parent="NodeUtils" instance=ExtResource("1_c8bha")]
+layout_mode = 2
+theme = ExtResource("7_obesw")
+
+[node name="Head" parent="NodeUtils/Controls" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_sb60x")
+
+[node name="Title" parent="NodeUtils/Controls/Head" index="0"]
+theme_override_colors/font_disabled_color = Color(0.45098, 0.462745, 0.482353, 1)
+disabled = true
+text = "Node"
+icon = ExtResource("5_7h0i1")
+
+[node name="Body" parent="NodeUtils/Controls" index="1"]
+visible = true
+theme_override_constants/margin_left = 20
+
+[node name="UtilControls" type="VBoxContainer" parent="NodeUtils/Controls/Body" index="0"]
+layout_mode = 2
+
+[node name="HFlowButtons" type="HFlowContainer" parent="NodeUtils/Controls/Body/UtilControls"]
+layout_mode = 2
+
+[node name="FindReplaceNamesBtn" type="Button" parent="NodeUtils/Controls/Body/UtilControls/HFlowButtons"]
+layout_mode = 2
+text = "Find and Replace Names"
+icon = ExtResource("6_8bo30")
+alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="NodeUtils/Controls/Body/UtilControls"]
+layout_mode = 2
+theme_override_constants/separation = 25
 
 [node name="SkeletonUtils" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -70,6 +112,39 @@ expand_icon = true
 layout_mode = 2
 theme_override_constants/separation = 25
 
+[node name="BoneAttachmentUtils" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("8_grwf2")
+
+[node name="Controls" parent="BoneAttachmentUtils" instance=ExtResource("1_c8bha")]
+layout_mode = 2
+theme = ExtResource("4_8aqei")
+
+[node name="Head" parent="BoneAttachmentUtils/Controls" index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_sb60x")
+
+[node name="Title" parent="BoneAttachmentUtils/Controls/Head" index="0"]
+text = "BoneAttachment3D"
+icon = ExtResource("8_u7yob")
+
+[node name="Body" parent="BoneAttachmentUtils/Controls" index="1"]
+theme_override_constants/margin_left = 20
+
+[node name="UtilControls" type="VBoxContainer" parent="BoneAttachmentUtils/Controls/Body" index="0"]
+layout_mode = 2
+
+[node name="HFlowButtons" type="HFlowContainer" parent="BoneAttachmentUtils/Controls/Body/UtilControls"]
+layout_mode = 2
+
+[node name="ExtractChildrenBtn" type="Button" parent="BoneAttachmentUtils/Controls/Body/UtilControls/HFlowButtons"]
+layout_mode = 2
+text = "Extract Children"
+icon = ExtResource("10_v0f80")
+
+[node name="HSeparator" type="HSeparator" parent="BoneAttachmentUtils/Controls/Body/UtilControls"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
 [node name="AudioUtils" type="VBoxContainer" parent="."]
 layout_mode = 2
 script = ExtResource("8_fy45i")
@@ -108,12 +183,16 @@ theme_override_constants/separation = 25
 
 [node name="FileDialog" type="FileDialog" parent="AudioUtils"]
 initial_position = 2
-filters = PackedStringArray("*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized")
+filters = PackedStringArray("*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized", "*.tres, *.res ; All Recognized")
 
 [connection signal="toggled" from="HideUnselected" to="." method="_on_hide_unselected_toggled"]
+[connection signal="pressed" from="NodeUtils/Controls/Body/UtilControls/HFlowButtons/FindReplaceNamesBtn" to="NodeUtils" method="_on_group_rand_btn_pressed"]
 [connection signal="pressed" from="SkeletonUtils/Controls/Body/UtilControls/HFlowButtons/SetupJiggleBtn" to="SkeletonUtils" method="_on_setup_physics_btn_pressed"]
 [connection signal="pressed" from="SkeletonUtils/Controls/Body/UtilControls/HFlowButtons/RemoveJiggleBtn" to="SkeletonUtils" method="_on_remove_physics_btn_pressed"]
+[connection signal="pressed" from="BoneAttachmentUtils/Controls/Body/UtilControls/HFlowButtons/ExtractChildrenBtn" to="BoneAttachmentUtils" method="_on_extract_children_btn_pressed"]
 [connection signal="pressed" from="AudioUtils/Controls/Body/UtilControls/HFlowButtons/GroupRandBtn" to="AudioUtils" method="_on_group_rand_btn_pressed"]
 
+[editable path="NodeUtils/Controls"]
 [editable path="SkeletonUtils/Controls"]
+[editable path="BoneAttachmentUtils/Controls"]
 [editable path="AudioUtils/Controls"]

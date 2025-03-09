@@ -11,6 +11,7 @@ var editor_filesystem : EditorFileSystem;
 func _ready() -> void:
 	var util_nodes_in: Dictionary[Variant, VgorlUtil] = {
 		"Skeleton3D": $SkeletonUtils,
+		"BoneAttachment3D": $BoneAttachmentUtils,
 	};
 	util_nodes = _expand_util_types(util_nodes_in);
 	var util_resources_in: Dictionary[Variant, VgorlUtil] = {
